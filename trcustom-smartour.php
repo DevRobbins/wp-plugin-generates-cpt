@@ -9,7 +9,7 @@ Plugin URI: https://smartours.com/
 Description: This plugin creates a new CPT for 'Tours' with specific CPT settings and custom fields.
 Version: 1.0.0
 Author: Tom Robbins
-Author URI: https://github.com/DevRobbins
+Author URI: https://www.linkedin.com/in/tomrobbins-dev/
 License: GPLv2 or later
 Text Domain: trcustom-smartour
 */
@@ -141,6 +141,8 @@ register_activation_hook(__FILE__, array($trSmartourPlugin, 'activate'));
 //Deactivation
 register_deactivation_hook(__FILE__, array($trSmartourPlugin, 'deactivate'));
 
+
+// Add meta box
 function tours_add_meta_box() {        
     $screens = array( 'tours' );
     
@@ -267,6 +269,7 @@ function my_admin_notice_tourcode(){
     global $post;
     $notice_tourCode = get_option('tour_code_notice');
     if (empty($notice_tourCode)) return '';
+    if(empty($post)) return '';
     foreach($notice_tourCode as $pid => $m){
         if ($post->ID == $pid ){
             echo '<div id="message" class="error"><p>'.$m.'</p></div>';
@@ -282,6 +285,7 @@ function my_admin_notice_depdate() {
     global $post;
     $notice_DepDate = get_option('tour_departuredate_notice');
     if (empty($notice_DepDate)) return '';
+    if(empty($post)) return '';
     foreach($notice_DepDate as $pid => $m){
         if ($post->ID == $pid ){
             echo '<div id="message" class="error"><p>'.$m.'</p></div>';
